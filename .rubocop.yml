@@ -104,6 +104,7 @@ Style/MethodCallWithArgsParentheses:
   IgnoredMethods:
     - add_dependency
     - add_development_dependency
+    - gem
     - load
     - puts
     - raise
