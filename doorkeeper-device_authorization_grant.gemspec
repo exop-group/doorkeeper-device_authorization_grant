@@ -19,5 +19,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
   spec.add_development_dependency 'rubocop', '~> 0.86.0'
+  spec.add_development_dependency 'simplecov', '~> 0.18.5'
   spec.add_development_dependency 'sqlite3'
 end
