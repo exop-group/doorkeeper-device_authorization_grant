@@ -1,9 +1,7 @@
 $:.push File.expand_path("lib", __dir__)
 
-# Maintain your gem's version:
 require "doorkeeper/device_authorization_grant/version"
 
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
   spec.name        = "doorkeeper-device_authorization_grant"
   spec.version     = Doorkeeper::DeviceAuthorizationGrant::VERSION
