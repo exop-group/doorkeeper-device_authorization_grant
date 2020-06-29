@@ -90,9 +90,9 @@ module Doorkeeper
           device_grant.present? && device_grant.application_id == client.id
         end
 
-        # @return [Integer]
+        # @return [ActiveSupport::Duration]
         def device_code_polling_interval
-          configuration.device_code_polling_interval.seconds&.to_i
+          configuration.device_code_polling_interval.seconds
         end
 
         # @return [::Doorkeeper::DeviceAuthorizationGrant::Config]
