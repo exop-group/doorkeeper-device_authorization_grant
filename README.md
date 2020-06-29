@@ -47,7 +47,7 @@ $ rails generate doorkeeper:device_authorization_grant:install
 Generate a migration for Active Record (other ORMs are currently not supported):
 
 ```bash
-$ rails doorkeeper_device_authorization_grant_engine:install:migrations 
+$ rails doorkeeper_device_authorization_grant_engine:install:migrations
 ```
 
 ## Configuration
