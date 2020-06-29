@@ -16,7 +16,6 @@ require 'sprockets/railtie'
 require 'rails/test_unit/railtie'
 
 Bundler.require(*Rails.groups)
-require 'doorkeeper'
 require 'doorkeeper/device_authorization_grant'
 
 module Dummy
