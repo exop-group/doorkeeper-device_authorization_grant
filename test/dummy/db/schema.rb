@@ -54,6 +54,22 @@ ActiveRecord::Schema.define(version: 2020_06_29_110429) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
+  create_table "oauth_device_grants", force: :cascade do |t|
+    t.integer "resource_owner_id"
+    t.integer "application_id", null: false
+    t.string "device_code", null: false
+    t.string "user_code"
+    t.integer "expires_in", null: false
+    t.datetime "created_at", null: false
+    t.datetime "last_polling_at"
+    t.string "scopes", default: "", null: false
+    t.index ["application_id"], name: "index_oauth_device_grants_on_application_id"
+    t.index ["device_code"], name: "index_oauth_device_grants_on_device_code", unique: true
+    t.index ["resource_owner_id"], name: "index_oauth_device_grants_on_resource_owner_id"
+    t.index ["user_code"], name: "index_oauth_device_grants_on_user_code", unique: true
+  end
+
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "oauth_device_grants", "oauth_applications", column: "application_id"
 end
