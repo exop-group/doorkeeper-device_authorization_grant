@@ -1,0 +1,122 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  DisplayStyleGuide: true
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/FirstArrayElementLineBreak:
+  Enabled: true
+
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+Layout/FirstMethodParameterLineBreak:
+  Enabled: true
+
+Layout/HeredocArgumentClosingParenthesis:
+  Enabled: true
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/HeredocMethodCallPosition:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/AutoResourceCleanup:
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/ConstantVisibility:
+  Enabled: true
+
+Style/DateTime:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/ImplicitRuntimeError:
+  Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInCamelCaseMethod: true
+  IgnoredMethods:
+    - add_dependency
+    - add_development_dependency
+    - load
+    - puts
+    - require
+    - require_relative
+    - source
+    - task
+  Exclude:
+    - test/dummy/config/puma.rb
+
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Style/OptionHash:
+  Enabled: true
+
+Style/RedundantFetchBlock:
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+
+Style/Send:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Style/StringMethods:
+  Enabled: true
+
+Style/TrailingCommaInBlockArgs:
+  Enabled: true
