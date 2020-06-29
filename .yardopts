@@ -1,0 +1,5 @@
+--fail-on-warning
+--embed-mixins
+--default-return void
+--markup markdown
+--verbose
