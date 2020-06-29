@@ -67,7 +67,7 @@ module Doorkeeper
 
       # @!attribute [r] verification_uri_complete
       #   A Proc returning the verification URI that includes the "user_code"
-      #   (or other information with the  same function as the "user_code"), which is
+      #   (or other information with the same function as the "user_code"), which is
       #   designed for non-textual transmission. This is optional, so the Proc can
       #   also return `nil`.
       #   @return [Proc]
