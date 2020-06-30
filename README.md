@@ -316,5 +316,12 @@ Content-Type: application/json
 The device authentication flow is now complete, and the token data can be used to
 authenticate requests against the authorization and/or resource server.
 
+## Example Application
+
+Here you can find an example Rails application which uses this gem,
+together with a little HTML/JS client to try out the device flow:
+
+[https://github.com/exop-group/doorkeeper-device-flow-example](https://github.com/exop-group/doorkeeper-device-flow-example)
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
