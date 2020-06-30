@@ -105,6 +105,7 @@ Style/MethodCallWithArgsParentheses:
     - add_dependency
     - add_development_dependency
     - gem
+    - gemspec
     - load
     - puts
     - raise
