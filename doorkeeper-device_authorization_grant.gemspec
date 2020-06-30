@@ -16,6 +16,8 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
+  spec.required_ruby_version = '>= 2.5'
+
   spec.add_dependency 'doorkeeper', '~> 5.4'
 
   spec.add_development_dependency 'rubocop', '~> 0.86.0'
