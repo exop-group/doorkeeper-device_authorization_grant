@@ -3,6 +3,8 @@ AllCops:
   DisplayStyleGuide: true
   Exclude:
     - test/dummy/db/**/*.rb
+    - vendor/**/*
+    - gemfiles/vendor/**/*
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
