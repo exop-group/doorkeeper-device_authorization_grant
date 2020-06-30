@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Add missing required Ruby version Gem Specification attribute.
+- Change RuboCop target Ruby version according to the Gem Specification (see above).
 
 ## [0.1.0] - 2020-06-30
 ### Added

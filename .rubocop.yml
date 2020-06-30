@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.5
   DisplayStyleGuide: true
   Exclude:
     - test/dummy/db/**/*.rb
