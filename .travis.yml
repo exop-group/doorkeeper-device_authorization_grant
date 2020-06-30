@@ -1,0 +1,19 @@
+language: ruby
+cache: bundler
+
+rvm:
+  - 2.5
+  - 2.6
+  - 2.7
+
+gemfile:
+  - gemfiles/rails_5_0.gemfile
+  - gemfiles/rails_5_1.gemfile
+  - gemfiles/rails_5_2.gemfile
+  - gemfiles/rails_6_0.gemfile
+
+jobs:
+  include:
+    - rvm: 2.7
+      gemfile: gemfiles/rails_6_0.gemfile
+      script: bundle exec rubocop
