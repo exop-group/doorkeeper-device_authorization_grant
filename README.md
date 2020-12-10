@@ -185,7 +185,9 @@ gem extension) like this:
 POST /oauth/authorize_device HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
-client_id=1406020730&scope=example_scope
+client_id=1406020730
+&client_secret=12345678
+&scope=example_scope
 ```
 
 ### Device Authorization Response
@@ -240,6 +242,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=device_code
 &device_code=GmRhmhcxhwAzkoEqiMEg_DnyEysNkuNhszIySk9eS
 &client_id=1406020730
+&client_secret=12345678
 ```
 
 **Note:** this is a non-standard `grant_type`, used instead of the official 
