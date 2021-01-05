@@ -9,3 +9,4 @@ test/dummy/tmp/
 coverage/
 doc/
 .yardoc/
+Gemfile.lock
