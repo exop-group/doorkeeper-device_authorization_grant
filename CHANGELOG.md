@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Add "Example Application" section to the README.
+- Install `rubocop-rails` development dependency.
 
 ### Changed
-- Extract `DeviceGrant` implementation into new module `DeviceGrantMixin`.
+- [#2] Extract `DeviceGrant` implementation into new module `DeviceGrantMixin`.
 - Upgrade development dependencies.
+- Upgrade RuboCop as well, keep its config file up to date, and refactor the
+  code solving new offenses.
 
 ## [0.1.1] - 2020-06-30
 ### Fixed
