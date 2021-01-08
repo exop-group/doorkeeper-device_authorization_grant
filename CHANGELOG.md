@@ -8,8 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add "Example Application" section to the README.
 - Install `rubocop-rails` development dependency.
-- Run tests also with Rails version `6.1`.
-- Run tests also with Ruby version `3.0`.
+- Add Rails version `6.1` to Travis CI testing matrix.
+- Add Ruby version `3.0` to Travis CI testing matrix, running only together
+  with Rails version `>= 6.0`.
 
 ### Changed
 - [#2] Extract `DeviceGrant` implementation into new module `DeviceGrantMixin`.
