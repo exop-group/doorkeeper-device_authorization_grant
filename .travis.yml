@@ -16,5 +16,5 @@ gemfile:
 jobs:
   include:
     - rvm: 2.7
-      gemfile: gemfiles/rails_6_0.gemfile
+      gemfile: gemfiles/rails_6_1.gemfile
       script: bundle exec rubocop
