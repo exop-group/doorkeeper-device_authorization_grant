@@ -9,6 +9,7 @@ module Doorkeeper
   # OAuth 2.0 Device Authorization Grant extension for Doorkeeper.
   module DeviceAuthorizationGrant
     autoload :DeviceGrant, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant'
+    autoload :DeviceGrantMixin, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant_mixin'
     autoload :Errors, 'doorkeeper/device_authorization_grant/errors'
     autoload :VERSION, 'doorkeeper/device_authorization_grant/version'
 
