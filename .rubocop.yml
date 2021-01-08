@@ -34,6 +34,10 @@ Layout/MultilineHashKeyLineBreaks:
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: true
 
+Lint/EmptyBlock:
+  Exclude:
+    - test/lib/generators/templates/routes.rb
+
 Lint/HeredocMethodCallPosition:
   Enabled: true
 
