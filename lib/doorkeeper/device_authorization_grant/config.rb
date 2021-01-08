@@ -18,8 +18,10 @@ module Doorkeeper
     # Error raised in case of missing configuration
     class MissingConfiguration < StandardError
       def initialize
-        super('Configuration for Doorkeeper::DeviceAuthorizationGrant missing. ' \
-              'Do you have Doorkeeper::DeviceAuthorizationGrant initializer?')
+        super(
+          'Configuration for Doorkeeper::DeviceAuthorizationGrant missing. ' \
+          'Do you have Doorkeeper::DeviceAuthorizationGrant initializer?'
+        )
       end
     end
 

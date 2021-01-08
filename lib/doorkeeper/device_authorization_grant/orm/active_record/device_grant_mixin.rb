@@ -2,6 +2,10 @@
 
 module Doorkeeper
   module DeviceAuthorizationGrant
+    # Module mixin for Device Grant models.
+    #
+    # This is similar to Doorkeeper `AccessGrantMixin`, but specific for handling
+    # OAuth 2.0 Device Authorization Grant.
     module DeviceGrantMixin
       extend ActiveSupport::Concern
       include ::Doorkeeper::Models::Expirable
@@ -42,6 +46,7 @@ module Doorkeeper
         )
       end
 
+      # ClassMethods
       module ClassMethods
         # Returns an instance of the DeviceGrant with specific device code
         # value.

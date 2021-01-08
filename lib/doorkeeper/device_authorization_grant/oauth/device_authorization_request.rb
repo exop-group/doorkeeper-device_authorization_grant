@@ -7,8 +7,8 @@ module Doorkeeper
       #
       # @see https://tools.ietf.org/html/rfc8628#section-3.1 RFC 8628, sect. 3.1
       class DeviceAuthorizationRequest < Doorkeeper::OAuth::BaseRequest
-        attr_accessor :server
-        attr_accessor :client
+        attr_accessor :server,
+                      :client
 
         # @return [String]
         attr_accessor :host_name
@@ -19,6 +19,7 @@ module Doorkeeper
         # @param client
         # @param host_name [String]
         def initialize(server, client, host_name)
+          super()
           @server = server
           @client = client
           @host_name = host_name

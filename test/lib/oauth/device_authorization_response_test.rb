@@ -116,7 +116,7 @@ module Doorkeeper
 
         test '#body complete verification URI can be omitted' do
           Doorkeeper::DeviceAuthorizationGrant.configure do
-            verification_uri_complete ->(*_) { nil }
+            verification_uri_complete ->(*) {}
           end
 
           refute_includes @response.body, 'verification_uri_complete'

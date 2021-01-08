@@ -16,6 +16,7 @@ module Doorkeeper
         # @param device_grant [DeviceGrant]
         # @param host_name [String]
         def initialize(device_grant, host_name)
+          super()
           @device_grant = device_grant
           @host_name = host_name
         end

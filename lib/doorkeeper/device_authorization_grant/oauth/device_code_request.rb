@@ -7,13 +7,12 @@ module Doorkeeper
       #
       # @see https://tools.ietf.org/html/rfc8628#section-3.4 RFC 8628, sect. 3.4
       class DeviceCodeRequest < ::Doorkeeper::OAuth::BaseRequest
-        attr_accessor :server
-        attr_accessor :client
+        attr_accessor :server,
+                      :client,
+                      :access_token
 
         # @return [DeviceGrant]
         attr_accessor :device_grant
-
-        attr_accessor :access_token
 
         validate :client, error: :invalid_client
         validate :device_grant, error: :invalid_grant
@@ -22,6 +21,8 @@ module Doorkeeper
         # @param client
         # @param device_grant [DeviceGrant]
         def initialize(server, client, device_grant)
+          super()
+
           @server = server
           @client = client
           @device_grant = device_grant
