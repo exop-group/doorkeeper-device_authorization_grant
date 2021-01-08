@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add "Example Application" section to the README.
 
 ### Changed
-- `DeviceGrant` implementation has been extracted into new module `DeviceGrantMixin`
+- Extract `DeviceGrant` implementation into new module `DeviceGrantMixin`.
+- Upgrade development dependencies.
 
 ## [0.1.1] - 2020-06-30
 ### Fixed
