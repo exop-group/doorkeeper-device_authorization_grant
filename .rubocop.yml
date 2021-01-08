@@ -1,13 +1,11 @@
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.5
   DisplayStyleGuide: true
   Exclude:
     - test/dummy/db/**/*.rb
     - vendor/**/*
     - gemfiles/vendor/**/*
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
 
 Layout/FirstArrayElementLineBreak:
   Enabled: true
@@ -36,22 +34,7 @@ Layout/MultilineHashKeyLineBreaks:
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: true
 
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-
 Lint/HeredocMethodCallPosition:
-  Enabled: true
-
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
   Enabled: true
 
 Metrics/BlockLength:
@@ -83,18 +66,6 @@ Style/Documentation:
     - test/**/*.rb
     - db/migrate/*.rb
 
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
 Style/ImplicitRuntimeError:
   Enabled: true
 
@@ -106,15 +77,14 @@ Style/MethodCallWithArgsParentheses:
   IgnoredMethods:
     - add_dependency
     - add_development_dependency
-    - gem
-    - gemspec
-    - load
+    - hash_token_secrets
+    - head
     - puts
     - raise
+    - redirect_to
+    - render
     - require
     - require_relative
-    - source
-    - task
   Exclude:
     - db/migrate/*.rb
     - test/dummy/config/puma.rb
@@ -125,19 +95,7 @@ Style/MethodCalledOnDoEndBlock:
 Style/OptionHash:
   Enabled: true
 
-Style/RedundantFetchBlock:
-  Enabled: true
-
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-
-Style/RedundantRegexpEscape:
-  Enabled: true
-
 Style/Send:
-  Enabled: true
-
-Style/SlicingWithRange:
   Enabled: true
 
 Style/StringMethods:
