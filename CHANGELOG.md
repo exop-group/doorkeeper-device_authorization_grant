@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add "Example Application" section to the README.
 - Install `rubocop-rails` development dependency.
+- Run tests also with Rails version `6.1`.
+- Run tests also with Ruby version `3.0`.
 
 ### Changed
 - [#2] Extract `DeviceGrant` implementation into new module `DeviceGrantMixin`.
