@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'doorkeeper', '~> 5.4'
 
   spec.add_development_dependency 'rubocop', '~> 0.86.0'
-  spec.add_development_dependency 'simplecov', '~> 0.18.5'
+  spec.add_development_dependency 'simplecov', '~> 0.21.1'
   spec.add_development_dependency 'sqlite3', '~> 1.3'
   spec.add_development_dependency 'yard', '~> 0.9.25'
 end
