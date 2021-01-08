@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add "Example Application" section to the README.
 
+### Changed
+- `DeviceGrant` implementation has been extracted into new module `DeviceGrantMixin`
+
 ## [0.1.1] - 2020-06-30
 ### Fixed
 - Add missing required Ruby version Gem Specification attribute.
