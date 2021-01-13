@@ -7,14 +7,15 @@ module Doorkeeper
       #
       # @see https://tools.ietf.org/html/rfc8628#section-3.1 RFC 8628, sect. 3.1
       class DeviceAuthorization < ::Doorkeeper::Request::Strategy
-        delegate :client, to: :server
+        delegate :client, :parameters, to: :server
 
         # @return [OAuth::DeviceAuthorizationRequest]
         def request
           @request ||= OAuth::DeviceAuthorizationRequest.new(
             Doorkeeper.configuration,
             client,
-            host_name
+            host_name,
+            parameters
           )
         end
 
