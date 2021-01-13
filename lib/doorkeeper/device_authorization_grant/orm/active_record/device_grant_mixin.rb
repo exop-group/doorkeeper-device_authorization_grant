@@ -10,7 +10,7 @@ module Doorkeeper
       extend ActiveSupport::Concern
       include ::Doorkeeper::Models::Expirable
 
-      included do
+      included do # rubocop:disable Metrics/BlockLength
         self.table_name = "#{table_name_prefix}oauth_device_grants#{table_name_suffix}"
 
         delegate :secret_strategy, :fallback_secret_strategy, to: :class
@@ -28,6 +28,7 @@ module Doorkeeper
 
         validates :resource_owner_id, presence: true, if: -> { user_code.blank? }
         validates :resource_owner_id, absence: true, if: -> { user_code.present? }
+        validate :scopes_match_configured, if: :enforce_scopes?
 
         scope(
           :expired,
@@ -126,6 +127,19 @@ module Doorkeeper
       def generate_device_code
         @raw_device_code = Doorkeeper::OAuth::Helpers::UniqueToken.generate
         secret_strategy.store_secret(self, :device_code, @raw_device_code)
+      end
+
+      def scopes_match_configured
+        if scopes.present? && !Doorkeeper::OAuth::Helpers::ScopeChecker.valid?(
+          scope_str: scopes.to_s,
+          server_scopes: Doorkeeper.config.scopes
+        )
+          errors.add(:scopes, :not_match_configured)
+        end
+      end
+
+      def enforce_scopes?
+        Doorkeeper.config.enforce_configured_scopes?
       end
     end
   end
