@@ -1,4 +1,11 @@
 en:
+  activerecord:
+    errors:
+      models:
+        doorkeeper/device_authorization_grant/device_grant:
+          attributes:
+            scopes:
+              not_match_configured: "doesn't match configured on the server."
   doorkeeper:
     device_authorization_grant:
       device_authorizations:
