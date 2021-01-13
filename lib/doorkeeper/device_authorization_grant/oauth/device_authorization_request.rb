@@ -18,11 +18,13 @@ module Doorkeeper
         # @param server
         # @param client
         # @param host_name [String]
-        def initialize(server, client, host_name)
+        # @param parameters [Hash]
+        def initialize(server, client, host_name, parameters = {}) # rubocop:disable Style/OptionHash
           super()
           @server = server
           @client = client
           @host_name = host_name
+          @original_scopes = parameters[:scope]
         end
 
         # @return [DeviceAuthorizationResponse, Doorkeeper::OAuth::ErrorResponse]
