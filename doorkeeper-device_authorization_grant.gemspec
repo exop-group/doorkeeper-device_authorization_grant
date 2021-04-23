@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.push(File.expand_path('lib', __dir__))
-
-require 'doorkeeper/device_authorization_grant/version'
+require_relative 'lib/doorkeeper/device_authorization_grant/version'
 
 Gem::Specification.new do |spec|
   spec.name        = 'doorkeeper-device_authorization_grant'
@@ -13,6 +11,10 @@ Gem::Specification.new do |spec|
   spec.summary     = 'OAuth 2.0 Device Authorization Grant extension for Doorkeeper.'
   spec.description = 'OAuth 2.0 Device Authorization Grant extension for Doorkeeper.'
   spec.license     = 'MIT'
+
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/master/CHANGELOG.md"
 
   spec.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
