@@ -45,4 +45,10 @@ module Doorkeeper
   module Request
     autoload :DeviceCode, 'doorkeeper/request/device_code'
   end
+
+  Doorkeeper::GrantFlow.register(
+    :device_code,
+    grant_type_matches: 'device_code',
+    grant_type_strategy: Doorkeeper::Request::DeviceCode
+  )
 end
