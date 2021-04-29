@@ -5,6 +5,7 @@ require 'active_model'
 require 'doorkeeper/device_authorization_grant/config'
 require 'doorkeeper/device_authorization_grant/engine'
 
+# Doorkeeper namespace
 module Doorkeeper
   # OAuth 2.0 Device Authorization Grant extension for Doorkeeper.
   module DeviceAuthorizationGrant
