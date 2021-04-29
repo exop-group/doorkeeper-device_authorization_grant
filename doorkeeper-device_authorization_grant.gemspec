@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.5'
 
-  spec.add_dependency 'doorkeeper', '~> 5.4'
+  spec.add_dependency 'doorkeeper', '~> 5.5'
 
   spec.add_development_dependency 'rubocop', '~> 1.13'
   spec.add_development_dependency 'rubocop-rails', '~> 2.9.1'

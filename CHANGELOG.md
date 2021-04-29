@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Upgrade development dependencies.
+- Upgrade `doorkeeper` dependency, matching versions `~> 5.5`.
 - Update generated files according to the boilerplate from rails `6.1.3.1`.
+- Upgrade development dependencies.
 
 ### Removed
 - Dropped support for Rails `5.0` and `5.1`. 
