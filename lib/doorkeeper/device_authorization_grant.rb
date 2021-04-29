@@ -12,6 +12,7 @@ module Doorkeeper
     autoload :DeviceGrant, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant'
     autoload :DeviceGrantMixin, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant_mixin'
     autoload :Errors, 'doorkeeper/device_authorization_grant/errors'
+    autoload :OAuth, 'doorkeeper/device_authorization_grant/oauth'
     autoload :VERSION, 'doorkeeper/device_authorization_grant/version'
 
     # Namespace for device authorization request strategies
@@ -49,7 +50,7 @@ module Doorkeeper
 
   Doorkeeper::GrantFlow.register(
     :device_code,
-    grant_type_matches: 'device_code',
+    grant_type_matches: Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE,
     grant_type_strategy: Doorkeeper::Request::DeviceCode
   )
 end

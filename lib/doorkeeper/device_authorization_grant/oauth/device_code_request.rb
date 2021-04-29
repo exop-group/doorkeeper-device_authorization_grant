@@ -27,8 +27,7 @@ module Doorkeeper
           @client = client
           @device_grant = device_grant
 
-          # this should be `urn:ietf:params:oauth:grant-type:device_code`
-          @grant_type = 'device_code'
+          @grant_type = Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE
         end
 
         def before_successful_response

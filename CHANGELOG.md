@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Upgrade `doorkeeper` dependency, matching versions `~> 5.5`.
+- Use the standard IANA URN value `urn:ietf:params:oauth:grant-type:device_code`
+  as grant type for device access token requests. It replaces the previous
+  value `device_code`, which was deliberately nonstandard to make it work with
+  Doorkeeper versions prior to `5.5`.
 - Update generated files according to the boilerplate from rails `6.1.3.1`.
 - Upgrade development dependencies.
 

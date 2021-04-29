@@ -7,17 +7,6 @@ This library implements the OAuth 2.0 device authorization grant
 [Ruby on Rails](https://rubyonrails.org/) applications on top of the
 [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) OAuth 2.0 framework.
 
-## Status
-
-This extension currently works with Doorkeeper version `>= 5.4.0`.
-
-As of June 25 2020, due to some limitations of Doorkeeper, it is currently
-inconvenient for this Gem to use the official OAuth grant type
-`urn:ietf:params:oauth:grant-type:device_code`. Instead, it has been renamed
-to simply `device_code`, which is non-standard. This is going to be corrected
-soon: the next Doorkeeper release will include the ability to cleanly
-register custom Grant Flows - see [Doorkeeper Pull Request #1418](https://github.com/doorkeeper-gem/doorkeeper/pull/1418).
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -55,7 +44,7 @@ $ rails doorkeeper_device_authorization_grant_engine:install:migrations
 ### Doorkeeper configuration
 
 In your Doorkeeper initializer (usually `config/initializers/doorkeeper.rb`), enable
-the device flow extension grant type, adding to the `grant_flows` option the `device_code`
+the new grant flow extension, adding to the `grant_flows` option the `device_code`
 string. For example:
 
 ```ruby
@@ -65,9 +54,6 @@ string. For example:
     # ... 
   
     grant_flows [
-      # Note: this is a non-standard grant flow, used instead of the
-      # official `urn:ietf:params:oauth:grant-type:device_code` due to
-      # current Doorkeeper limitations.
       'device_code',
  
       # together with all the other grant flows you already enabled, for example:
@@ -79,11 +65,6 @@ string. For example:
     # ...
   end
 ```
-
-Please note that **this is not the official grant flow**. The real one should be
-the IANA URN `urn:ietf:params:oauth:grant-type:device_code`, however this is hard
-to support with the current version of Doorkeeper, due to how strategy classes are
-looked up by grant type value.
 
 ### Device Authorization Grant configuration
 
@@ -237,14 +218,10 @@ by Dorkeeper), for example:
 POST /oauth/token HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=device_code
+grant_type=urn:ietf:params:oauth:grant-type:device_code
 &device_code=GmRhmhcxhwAzkoEqiMEg_DnyEysNkuNhszIySk9eS
 &client_id=1406020730
 ```
-
-**Note:** this is a non-standard `grant_type`, used instead of the official 
-`urn:ietf:params:oauth:grant-type:device_code` due to current limitations of
-the Doorkeeper gem.
 
 The response to this request is defined in the next section. It is expected for
 the *Device Client* to try the access token request repeatedly in a polling
