@@ -14,6 +14,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   as grant type for device access token requests. It replaces the previous
   value `device_code`, which was deliberately nonstandard to make it work with
   Doorkeeper versions prior to `5.5`.
+
+  The old `device_code` value might still work out of the box with some
+  Doorkeeper releases, thanks to a fallback strategy; however, a warning message
+  will be printed, and this functionality will be eventually removed in newer
+  Doorkeeper versions.
+
+  An appropriate way to make the device flow work with any nonstandard / custom
+  grant type is to simply register your own custom flow, using the strategy
+  class `Doorkeeper::Request::DeviceCode` provided by this extension, and enable
+  it in Doorkeeper configuration.
+  
+  For example, you could add the following code to an appropriate place, such
+  as an initializer file:
+  ```ruby
+  Doorkeeper::GrantFlow.register(
+    :custom_device_code, # custom name of your choice
+    grant_type_matches: 'device_code', # custom grant type value
+    grant_type_strategy: Doorkeeper::Request::DeviceCode
+  )
+  ```
+  Then, enable this grant flow in Doorkeeper configuration:
+  ```ruby
+  Doorkeeper.configure do
+    # ...
+
+    grant_flows [
+      'custom_device_code', # name of your custom flow, as registered above
+      'device_code', # also enable the default/standard flow, if you want
+      # ...
+    ]
+  
+    # ...
+  end
+  ```
 - Update generated files according to the boilerplate from rails `6.1.3.1`.
 - Upgrade development dependencies.
 
