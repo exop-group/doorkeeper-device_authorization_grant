@@ -15,10 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   value `device_code`, which was deliberately nonstandard to make it work with
   Doorkeeper versions prior to `5.5`.
 
-  The old `device_code` value might still work out of the box with some
-  Doorkeeper releases, thanks to a fallback strategy; however, a warning message
-  will be printed, and this functionality will be eventually removed in newer
-  Doorkeeper versions.
+  The old `device_code` value still works out of the box with Doorkeeper <= 5.5.1. However, a warning message
+  will be printed, and this functionality will be eventually removed in newer Doorkeeper versions.
 
   An appropriate way to make the device flow work with any nonstandard / custom
   grant type is to simply register your own custom flow, using the strategy
