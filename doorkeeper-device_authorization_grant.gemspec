@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'doorkeeper', '~> 5.5'
 
   spec.add_development_dependency 'rubocop', '~> 1.14'
-  spec.add_development_dependency 'rubocop-rails', '~> 2.9.1'
+  spec.add_development_dependency 'rubocop-rails', '~> 2.10', '>= 2.10.1'
   spec.add_development_dependency 'simplecov', '~> 0.21.2'
   spec.add_development_dependency 'sqlite3', '~> 1.4.2'
   spec.add_development_dependency 'yard', '~> 0.9.26'
