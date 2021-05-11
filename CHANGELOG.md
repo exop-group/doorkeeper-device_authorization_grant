@@ -15,34 +15,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   value `device_code`, which was deliberately nonstandard to make it work with
   Doorkeeper versions prior to `5.5`.
 
-  The old `device_code` value still works out of the box with Doorkeeper <= 5.5.1. However, a warning message
-  will be printed, and this functionality will be eventually removed in newer Doorkeeper versions.
+  This change requires you to update the `grant_type` parameter of the device
+  access token requests from your clients, setting it to the aforementioned
+  standard IANA URN value.
+  More details about this request are available under the section
+  `Device Access Token Request / polling` from the README
+  ([link](https://github.com/exop-group/doorkeeper-device_authorization_grant#device-access-token-request--polling)).
 
-  An appropriate way to make the device flow work with any nonstandard / custom
-  grant type is to simply register your own custom flow, using the strategy
-  class `Doorkeeper::Request::DeviceCode` provided by this extension, and enable
-  it in Doorkeeper configuration.
-  
-  For example, you could add the following code to an appropriate place, such
+  Depending on your installed version of Doorkeeper (in the range `~> 5.5`),
+  the old `device_code` grant type value might still work out of the box,
+  thanks to a fallback strategy provided by Doorkeeper gem itself.
+  At the time of writing, using Doorkeeper `5.5.0` and `5.5.1`, the old grant
+  type still works, but a warning message is printed at each request,
+  announcing that this fallback strategy will be removed in newer
+  versions of Doorkeeper.
+
+  If you want to adequately support the old `device_code` grant type from
+  your backend, you can simply register an additional Doorkeeper Grant Flow
+  and enable it in Doorkeeper configuration. For the Grant Flow registration
+  you can use the `Doorkeeper::Request::DeviceCode` strategy class as provided
+  by this gem.
+
+  For example, you can add the following code to an appropriate place, such
   as an initializer file:
   ```ruby
   Doorkeeper::GrantFlow.register(
-    :custom_device_code, # custom name of your choice
-    grant_type_matches: 'device_code', # custom grant type value
+    :legacy_device_code,
+    grant_type_matches: 'device_code',
     grant_type_strategy: Doorkeeper::Request::DeviceCode
   )
   ```
-  Then, enable this grant flow in Doorkeeper configuration:
+  Then, you can enable this grant flow in Doorkeeper configuration, either
+  in addition to or in place of the default grant flow, according to your needs:
   ```ruby
   Doorkeeper.configure do
     # ...
 
     grant_flows [
-      'custom_device_code', # name of your custom flow, as registered above
+      'legacy_device_code',
       'device_code', # also enable the default/standard flow, if you want
       # ...
     ]
-  
+
     # ...
   end
   ```
