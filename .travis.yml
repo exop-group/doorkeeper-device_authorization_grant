@@ -8,18 +8,12 @@ rvm:
   - 3.0
 
 gemfile:
-  - gemfiles/rails_5_0.gemfile
-  - gemfiles/rails_5_1.gemfile
   - gemfiles/rails_5_2.gemfile
   - gemfiles/rails_6_0.gemfile
   - gemfiles/rails_6_1.gemfile
 
 jobs:
   exclude:
-    - rvm: 3.0
-      gemfile: gemfiles/rails_5_0.gemfile
-    - rvm: 3.0
-      gemfile: gemfiles/rails_5_1.gemfile
     - rvm: 3.0
       gemfile: gemfiles/rails_5_2.gemfile
   include:

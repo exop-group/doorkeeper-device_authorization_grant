@@ -5,12 +5,14 @@ require 'active_model'
 require 'doorkeeper/device_authorization_grant/config'
 require 'doorkeeper/device_authorization_grant/engine'
 
+# Doorkeeper namespace
 module Doorkeeper
   # OAuth 2.0 Device Authorization Grant extension for Doorkeeper.
   module DeviceAuthorizationGrant
     autoload :DeviceGrant, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant'
     autoload :DeviceGrantMixin, 'doorkeeper/device_authorization_grant/orm/active_record/device_grant_mixin'
     autoload :Errors, 'doorkeeper/device_authorization_grant/errors'
+    autoload :OAuth, 'doorkeeper/device_authorization_grant/oauth'
     autoload :VERSION, 'doorkeeper/device_authorization_grant/version'
 
     # Namespace for device authorization request strategies
@@ -45,4 +47,10 @@ module Doorkeeper
   module Request
     autoload :DeviceCode, 'doorkeeper/request/device_code'
   end
+
+  Doorkeeper::GrantFlow.register(
+    :device_code,
+    grant_type_matches: Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE,
+    grant_type_strategy: Doorkeeper::Request::DeviceCode
+  )
 end

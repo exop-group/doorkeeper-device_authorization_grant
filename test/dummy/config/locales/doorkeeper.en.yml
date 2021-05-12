@@ -72,6 +72,8 @@ en:
         able_to: 'This application will be able to'
       show:
         title: 'Authorization code'
+      form_post:
+        title: 'Submit this form'
 
     authorized_applications:
       confirmations:
@@ -93,7 +95,6 @@ en:
         invalid_request:
           unknown: 'The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed.'
           missing_param: 'Missing required parameter: %{value}.'
-          not_support_pkce: 'Invalid code_verifier parameter. Server does not support pkce.'
           request_not_authorized: 'Request need to be authorized. Required parameter for authorizing request is missing or invalid.'
         invalid_redirect_uri: "The requested redirect uri is malformed or doesn't match client redirect URI."
         unauthorized_client: 'The client is not authorized to perform this request using this method.'
@@ -110,6 +111,7 @@ en:
 
         # Access grant errors
         unsupported_response_type: 'The authorization server does not support this response type.'
+        unsupported_response_mode: 'The authorization server does not support this response mode.'
 
         # Access token errors
         invalid_client: 'Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.'
