@@ -2,7 +2,7 @@
 
 module Doorkeeper
   module DeviceAuthorizationGrant
-    VERSION = '0.2.1'
+    VERSION = '1.0.0'
     public_constant :VERSION
   end
 end
