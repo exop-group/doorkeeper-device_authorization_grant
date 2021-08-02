@@ -29,7 +29,7 @@ module Doorkeeper
         # @return [Hash]
         def body
           {
-            'device_code' => device_grant.device_code,
+            'device_code' => device_grant.plaintext_device_code,
             'user_code' => device_grant.user_code,
             'verification_uri' => verification_uri,
             'verification_uri_complete' => verification_uri_complete,
