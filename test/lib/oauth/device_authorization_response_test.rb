@@ -53,7 +53,7 @@ module Doorkeeper
         end
 
         test '#body includes the device code' do
-          assert_equal @device_grant.device_code, @response.body['device_code']
+          assert_equal @device_grant.plaintext_device_code, @response.body['device_code']
         end
 
         test '#body includes the user code' do
