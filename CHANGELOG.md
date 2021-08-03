@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2021-08-03
+### Fixed
+- Added compatibility with Doorkeeper's `hash_token_secrets` config option.
+
 ## [1.0.0] - 2021-05-12
 ### Added
 - Register this Doorkeeper extension as `device_code` custom OAuth Grant Flow.
