@@ -3,14 +3,14 @@
 require_relative 'lib/doorkeeper/device_authorization_grant/version'
 
 Gem::Specification.new do |spec|
-  spec.name        = 'doorkeeper-device_authorization_grant'
-  spec.version     = Doorkeeper::DeviceAuthorizationGrant::VERSION
-  spec.authors     = ['EXOP Group']
-  spec.email       = ['opensource@exop-group.com']
-  spec.homepage    = 'https://github.com/exop-group/doorkeeper-device_authorization_grant'
-  spec.summary     = 'OAuth 2.0 Device Authorization Grant extension for Doorkeeper.'
+  spec.name = 'doorkeeper-device_authorization_grant'
+  spec.version = Doorkeeper::DeviceAuthorizationGrant::VERSION
+  spec.authors = ['EXOP Group']
+  spec.email = ['opensource@exop-group.com']
+  spec.homepage = 'https://github.com/exop-group/doorkeeper-device_authorization_grant'
+  spec.summary = 'OAuth 2.0 Device Authorization Grant extension for Doorkeeper.'
   spec.description = 'OAuth 2.0 Device Authorization Grant extension for Doorkeeper.'
-  spec.license     = 'MIT'
+  spec.license = 'MIT'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = spec.homepage

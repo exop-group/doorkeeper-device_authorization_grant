@@ -38,14 +38,12 @@ module Doorkeeper
         end
 
         test '#headers include no-store and no-cache' do
-          headers = @response.headers
-          assert_equal 'no-store', headers['Cache-Control']
-          assert_equal 'no-cache', headers['Pragma']
+          assert_equal 'no-store', @response.headers['Cache-Control']
+          assert_equal 'no-cache', @response.headers['Pragma']
         end
 
         test '#headers content type is JSON' do
-          assert_equal \
-            'application/json; charset=utf-8', @response.headers['Content-Type']
+          assert_equal 'application/json; charset=utf-8', @response.headers['Content-Type']
         end
 
         test '#status is ok' do
@@ -60,17 +58,12 @@ module Doorkeeper
           assert_equal @device_grant.user_code, @response.body['user_code']
         end
 
-        test '#body includes the default verification URI ' \
-          'if it was not customized' do
-          assert_equal \
-            'https://example.com/oauth/device',
-            @response.body['verification_uri']
+        test '#body includes the default verification URI if it was not customized' do
+          assert_equal 'https://example.com/oauth/device', @response.body['verification_uri']
         end
 
-        test '#body includes the default complete verification URI ' \
-          'if it was not customized' do
-          assert_equal\
-            "https://example.com/oauth/device?user_code=#{@device_grant.user_code}",
+        test '#body includes the default complete verification URI if it was not customized' do
+          assert_equal "https://example.com/oauth/device?user_code=#{@device_grant.user_code}",
             @response.body['verification_uri_complete']
         end
 
@@ -79,28 +72,21 @@ module Doorkeeper
             verification_uri ->(host_name) { "#{host_name}/foo/bar" }
           end
 
-          assert_equal \
-            'https://example.com/foo/bar',
-            @response.body['verification_uri']
+          assert_equal 'https://example.com/foo/bar', @response.body['verification_uri']
         end
 
-        test '#body complete verification URI can be customized based on ' \
-          'the verification URI' do
+        test '#body complete verification URI can be customized based on the verification URI' do
           Doorkeeper::DeviceAuthorizationGrant.configure do
             verification_uri_complete(
-              lambda do |verif_uri, _host_name, grant|
-                "#{verif_uri}/#{grant.user_code}"
-              end
+              ->(verif_uri, _host_name, grant) { "#{verif_uri}/#{grant.user_code}" }
             )
           end
 
-          assert_equal \
-            "https://example.com/oauth/device/#{@device_grant.user_code}",
+          assert_equal "https://example.com/oauth/device/#{@device_grant.user_code}",
             @response.body['verification_uri_complete']
         end
 
-        test '#body complete verification URI can be customized based on ' \
-          'the host name' do
+        test '#body complete verification URI can be customized based on the host name' do
           Doorkeeper::DeviceAuthorizationGrant.configure do
             verification_uri_complete(
               lambda do |_verif_uri, host_name, grant|
@@ -109,8 +95,7 @@ module Doorkeeper
             )
           end
 
-          assert_equal \
-            "https://example.com/baz/#{@device_grant.user_code}",
+          assert_equal "https://example.com/baz/#{@device_grant.user_code}",
             @response.body['verification_uri_complete']
         end
 
@@ -119,13 +104,11 @@ module Doorkeeper
             verification_uri_complete ->(*) {}
           end
 
-          refute_includes @response.body, 'verification_uri_complete'
+          assert_not_includes @response.body, 'verification_uri_complete'
         end
 
         test '#body includes expires_in' do
-          assert_equal \
-            @device_grant.expires_in.seconds,
-            @response.body['expires_in']
+          assert_equal @device_grant.expires_in.seconds, @response.body['expires_in']
         end
 
         test '#body includes the default interval' do
@@ -145,7 +128,7 @@ module Doorkeeper
             device_code_polling_interval nil
           end
 
-          refute_includes @response.body, 'interval'
+          assert_not_includes @response.body, 'interval'
         end
       end
     end

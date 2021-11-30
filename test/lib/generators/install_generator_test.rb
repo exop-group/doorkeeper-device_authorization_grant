@@ -5,7 +5,7 @@ require 'generators/doorkeeper/device_authorization_grant/install_generator'
 
 class InstallGeneratorTest < Rails::Generators::TestCase
   tests Doorkeeper::DeviceAuthorizationGrant::InstallGenerator
-  destination Rails.root.join('tmp', 'generators')
+  destination Rails.root.join('tmp/generators')
 
   setup do
     prepare_destination

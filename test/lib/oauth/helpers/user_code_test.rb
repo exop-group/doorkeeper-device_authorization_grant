@@ -13,7 +13,7 @@ module Doorkeeper
 
           test 'generates a new random string at each call' do
             first_code = UserCode.generate
-            10.times { refute_equal(first_code, UserCode.generate) }
+            10.times { assert_not_equal(first_code, UserCode.generate) }
           end
         end
       end
