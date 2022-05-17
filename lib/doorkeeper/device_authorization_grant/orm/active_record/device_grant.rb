@@ -4,7 +4,7 @@ module Doorkeeper
   module DeviceAuthorizationGrant
     # Model class, similar to Doorkeeper `AccessGrant`, but specific for
     # handling OAuth 2.0 Device Authorization Grant.
-    class DeviceGrant < ActiveRecord::Base
+    class DeviceGrant < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord Doorkeeper models inherit from ActiveRecord::Base.
       include DeviceGrantMixin
 
       # @!attribute application_id

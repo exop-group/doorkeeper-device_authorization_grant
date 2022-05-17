@@ -35,7 +35,7 @@ module Doorkeeper
             'verification_uri_complete' => verification_uri_complete,
             'expires_in' => device_grant.expires_in,
             'interval' => interval
-          }.reject { |_, value| value.blank? }
+          }.reject { |_, value| value.blank? } # rubocop:disable Rails/CompactBlank does not exist in Rails < 6.1
         end
 
         # @return [Hash]

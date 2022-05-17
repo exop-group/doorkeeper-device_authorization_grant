@@ -87,6 +87,9 @@ Lint/OrAssignmentToConstant:
 Lint/RedundantDirGlobSort:
   Enabled: true
 
+Lint/RefinementImportMethods:
+  Enabled: true
+
 Lint/RequireRelativeSelfPath:
   Enabled: true
 
@@ -123,6 +126,126 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Exclude:
     - '**/migrate/*'
+
+Naming/BlockForwarding:
+  Enabled: true
+
+Security/CompoundHash:
+  Enabled: true
+
+Security/IoMethods:
+  Enabled: true
+
+Style/ArgumentsForwarding:
+  Enabled: true
+
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+Style/CollectionCompact:
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/CommandLiteral:
+  EnforcedStyle: percent_x
+
+Style/CommentAnnotation:
+  Keywords:
+    - TODO
+    - FIXME
+    - HACK
+    - BUG
+
+Style/Documentation:
+  Exclude:
+    - '**/migrate/*'
+    - 'test/**/*'
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: true
+
+Style/EndlessMethod:
+  Enabled: true
+
+Style/EnvHome:
+  Enabled: true
+
+Style/FetchEnvVar:
+  Enabled: true
+
+Style/FileRead:
+  Enabled: true
+
+Style/FileWrite:
+  Enabled: true
+
+Style/HashConversion:
+  Enabled: true
+
+Style/HashExcept:
+  Enabled: true
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
+
+Style/InPatternThen:
+  Enabled: true
+
+Style/MapToHash:
+  Enabled: true
+
+Style/MultilineInPatternThen:
+  Enabled: true
+
+Style/NegatedIfElseCondition:
+  Enabled: true
+
+Style/NestedFileDirname:
+  Enabled: true
+
+Style/NilLambda:
+  Enabled: true
+
+Style/NumberedParameters:
+  Enabled: true
+  EnforcedStyle: disallow
+
+Style/NumberedParametersLimit:
+  Enabled: false # since NumberedParameters disallows numbered params anyways
+
+Style/ObjectThen:
+  Enabled: true
+
+Style/OpenStructUse:
+  Enabled: true
+
+Style/OptionHash:
+  Enabled: true
+
+Style/QuotedSymbols:
+  Enabled: true
+
+Style/RedundantArgument:
+  Enabled: true
+
+Style/RedundantInitialize:
+  Enabled: true
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: true
+
+Style/SelectByRegexp:
+  Enabled: true
+
+Style/StringChars:
+  Enabled: true
+
+Style/SwapValues:
+  Enabled: true
+
+# rubocop-performance
 
 Performance/AncestorsInclude:
   Enabled: true
@@ -169,98 +292,18 @@ Performance/SortReverse:
 Performance/Squeeze:
   Enabled: true
 
+Performance/StringIdentifierArgument:
+  Enabled: true
+
 Performance/StringInclude:
   Enabled: true
 
 Performance/Sum:
   Enabled: true
 
-Security/IoMethods:
-  Enabled: true
+# rubocop-rails
 
-Style/ArgumentsForwarding:
-  Enabled: true
-
-Style/BarePercentLiterals:
-  EnforcedStyle: percent_q
-
-Style/CollectionCompact:
-  Enabled: true
-
-Style/CollectionMethods:
-  Enabled: true
-
-Style/CommandLiteral:
-  EnforcedStyle: percent_x
-
-Style/CommentAnnotation:
-  Keywords:
-    - TODO
-    - FIXME
-    - HACK
-    - BUG
-
-Style/Documentation:
-  Exclude:
-    - '**/migrate/*'
-    - 'test/**/*'
-
-Style/DocumentDynamicEvalDefinition:
-  Enabled: true
-
-Style/EndlessMethod:
-  Enabled: true
-
-Style/HashConversion:
-  Enabled: true
-
-Style/HashExcept:
-  Enabled: true
-
-Style/IfWithBooleanLiteralBranches:
-  Enabled: true
-
-Style/InPatternThen:
-  Enabled: true
-
-Style/MultilineInPatternThen:
-  Enabled: true
-
-Style/NegatedIfElseCondition:
-  Enabled: true
-
-Style/NilLambda:
-  Enabled: true
-
-Style/NumberedParameters:
-  Enabled: true
-  EnforcedStyle: disallow
-
-Style/NumberedParametersLimit:
-  Enabled: false # since NumberedParameters disallows numbered params anyways
-
-Style/OpenStructUse:
-  Enabled: true
-
-Style/OptionHash:
-  Enabled: true
-
-Style/QuotedSymbols:
-  Enabled: true
-
-Style/RedundantArgument:
-  Enabled: true
-
-Style/RedundantSelfAssignmentBranch:
-  Enabled: true
-
-Style/SelectByRegexp:
-  Enabled: true
-
-Style/StringChars:
-  Enabled: true
-
-Style/SwapValues:
+Rails/ActionControllerTestCase:
   Enabled: true
 
 Rails/ActiveRecordCallbacksOrder:
@@ -272,10 +315,22 @@ Rails/AddColumnIndex:
 Rails/AfterCommitOverride:
   Enabled: true
 
-Rails/ApplicationRecord:
-  Enabled: false
-
 Rails/AttributeDefaultBlockValue:
+  Enabled: true
+
+Rails/CompactBlank:
+  Enabled: true
+
+Rails/DeprecatedActiveModelErrorsMethods:
+  Enabled: true
+
+Rails/DuplicateAssociation:
+  Enabled: true
+
+Rails/DuplicateScope:
+  Enabled: true
+
+Rails/DurationArithmetic:
   Enabled: true
 
 Rails/EagerEvaluationLogMessage:
@@ -290,7 +345,13 @@ Rails/ExpandedDateRange:
 Rails/FindById:
   Enabled: true
 
+Rails/I18nLazyLookup:
+  Enabled: true
+
 Rails/I18nLocaleAssignment:
+  Enabled: true
+
+Rails/I18nLocaleTexts:
   Enabled: true
 
 Rails/Inquiry:
@@ -302,6 +363,9 @@ Rails/MailerName:
 Rails/MatchRoute:
   Enabled: true
 
+Rails/MigrationClassName:
+  Enabled: true
+
 Rails/NegateInclude:
   Enabled: true
 
@@ -309,6 +373,9 @@ Rails/Pluck:
   Enabled: true
 
 Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RedundantPresenceValidationOnBelongsTo:
   Enabled: true
 
 Rails/RedundantTravelBack:
@@ -320,6 +387,9 @@ Rails/RenderInline:
 Rails/RenderPlainText:
   Enabled: true
 
+Rails/RootJoinChain:
+  Enabled: true
+
 Rails/ShortI18n:
   Enabled: true
 
@@ -327,6 +397,9 @@ Rails/SquishedSQLHeredocs:
   Enabled: true
 
 Rails/TimeZoneAssignment:
+  Enabled: true
+
+Rails/TransactionExitStatement:
   Enabled: true
 
 Rails/UnusedIgnoredColumns:
