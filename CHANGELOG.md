@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   code to solve the new offenses.
 - Opt-in for rubygems [MFA requirement](https://guides.rubygems.org/mfa-requirement-opt-in/).
 - Replace Travis CI with a GitHub Actions CI Workflow.
+- Test against additional Ruby and Rails versions.
 
 ## [1.0.1] - 2021-08-03
 ### Fixed
