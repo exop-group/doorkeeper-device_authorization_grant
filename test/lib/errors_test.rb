@@ -5,8 +5,7 @@ require 'test_helper'
 module Doorkeeper
   module DeviceAuthorizationGrant
     class ErrorsTest < ActiveSupport::TestCase
-      test 'AuthorizationPending is a DoorkeeperError with type ' \
-          'authorization_pending' do
+      test 'AuthorizationPending is a DoorkeeperError with type authorization_pending' do
         error = Errors::AuthorizationPending.new
         assert_kind_of ::Doorkeeper::Errors::DoorkeeperError, error
         assert_equal :authorization_pending, error.type

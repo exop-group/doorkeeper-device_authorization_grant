@@ -38,9 +38,9 @@ module Doorkeeper
         end
 
         test 'it creates a new device grant' do
-          assert_equal 0, DeviceGrant.count
-          @request.authorize
-          assert_equal 1, DeviceGrant.count
+          assert_changes -> { DeviceGrant.count }, from: 0, to: 1 do
+            @request.authorize
+          end
         end
 
         test 'it returns a device authorization response' do
@@ -50,10 +50,9 @@ module Doorkeeper
         test 'it requires the client' do
           @request.client = nil
           @request.validate
-          refute @request.valid?
+          assert_not @request.valid?
           assert_equal :invalid_client, @request.error
-          assert_instance_of \
-            Doorkeeper::OAuth::ErrorResponse, @request.authorize
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, @request.authorize
         end
 
         test 'only when valid, it removes expired device grants' do
@@ -90,8 +89,7 @@ module Doorkeeper
           assert_equal @application.id, device_grant.application_id
         end
 
-        test 'it assigns the default expires_in value to the new device ' \
-          'grant if not configured' do
+        test 'it assigns the default expires_in value to the new device grant if not configured' do
           @request.authorize
           device_grant = DeviceGrant.first
           assert_equal 300, device_grant.expires_in
@@ -114,8 +112,7 @@ module Doorkeeper
           @server.verify
         end
 
-        test 'it assigns a user code to the new device grant with the ' \
-          'default generator if not configured' do
+        test 'it assigns a user code to the new device grant with the default generator if not configured' do
           @request.authorize
           device_grant = DeviceGrant.first
           assert_instance_of String, device_grant.user_code

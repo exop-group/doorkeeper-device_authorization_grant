@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'psych', '~> 3.0'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 7.0.0'
+gem 'sprockets-rails', '~> 3.0'
 
 gemspec path: '../'

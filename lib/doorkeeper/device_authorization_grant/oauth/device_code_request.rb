@@ -7,9 +7,7 @@ module Doorkeeper
       #
       # @see https://tools.ietf.org/html/rfc8628#section-3.4 RFC 8628, sect. 3.4
       class DeviceCodeRequest < ::Doorkeeper::OAuth::BaseRequest
-        attr_accessor :server,
-                      :client,
-                      :access_token
+        attr_accessor :server, :client, :access_token
 
         # @return [DeviceGrant]
         attr_accessor :device_grant
@@ -64,7 +62,7 @@ module Doorkeeper
         def check_user_interaction!
           raise Errors::SlowDown if polling_too_fast?
 
-          device_grant.update!(last_polling_at: Time.now)
+          device_grant.update!(last_polling_at: Time.now.utc)
 
           raise Errors::AuthorizationPending if authorization_pending?
         end

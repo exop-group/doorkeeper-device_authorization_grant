@@ -20,7 +20,7 @@ module Doorkeeper
       def initialize
         super(
           'Configuration for Doorkeeper::DeviceAuthorizationGrant missing. ' \
-          'Do you have Doorkeeper::DeviceAuthorizationGrant initializer?'
+            'Do you have Doorkeeper::DeviceAuthorizationGrant initializer?'
         )
       end
     end

@@ -1,109 +1,415 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+
 AllCops:
-  NewCops: enable
-  TargetRubyVersion: 2.5
   DisplayStyleGuide: true
+  TargetRubyVersion: 2.5
   Exclude:
-    - test/dummy/db/**/*.rb
-    - vendor/**/*
-    - gemfiles/vendor/**/*
+    - 'test/dummy/db/schema.rb'
 
-Layout/FirstArrayElementLineBreak:
+Gemspec/DateAssignment:
   Enabled: true
 
-Layout/FirstHashElementLineBreak:
+Gemspec/RequireMFA:
+  Enabled: false
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+
+Layout/LineLength:
+  Max: 120
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/SpaceBeforeBrackets:
   Enabled: true
 
-Layout/FirstMethodArgumentLineBreak:
+Lint/AmbiguousAssignment:
   Enabled: true
 
-Layout/FirstMethodParameterLineBreak:
+Lint/AmbiguousOperatorPrecedence:
   Enabled: true
 
-Layout/HeredocArgumentClosingParenthesis:
+Lint/AmbiguousRange:
   Enabled: true
 
-Layout/MultilineArrayLineBreaks:
+Lint/DeprecatedConstants:
   Enabled: true
 
-Layout/MultilineAssignmentLayout:
+Lint/DuplicateBranch:
   Enabled: true
 
-Layout/MultilineHashKeyLineBreaks:
-  Enabled: true
-
-Layout/MultilineMethodArgumentLineBreaks:
+Lint/DuplicateRegexpCharacterClassElement:
   Enabled: true
 
 Lint/EmptyBlock:
-  Exclude:
-    - test/lib/generators/templates/routes.rb
-
-Lint/HeredocMethodCallPosition:
   Enabled: true
+
+Lint/EmptyClass:
+  Enabled: true
+
+Lint/EmptyInPattern:
+  Enabled: true
+
+Lint/IncompatibleIoSelectWithFiberScheduler:
+  Enabled: true
+
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: true
+
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: true
+
+Lint/NumberedParameterAssignment:
+  Enabled: true
+
+Lint/OrAssignmentToConstant:
+  Enabled: true
+
+Lint/RedundantDirGlobSort:
+  Enabled: true
+
+Lint/RefinementImportMethods:
+  Enabled: true
+
+Lint/RequireRelativeSelfPath:
+  Enabled: true
+
+Lint/SymbolConversion:
+  Enabled: true
+
+Lint/ToEnumArguments:
+  Enabled: true
+
+Lint/TripleQuotes:
+  Enabled: true
+
+Lint/UnexpectedBlockArity:
+  Enabled: true
+
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: true
+
+Lint/UselessRuby2Keywords:
+  Enabled: true
+
+Metrics/AbcSize:
+  Exclude:
+    - '**/migrate/*'
 
 Metrics/BlockLength:
   Exclude:
-    - test/**/*.rb
+    - 'test/**/*'
 
 Metrics/ClassLength:
   Exclude:
-    - test/**/*.rb
+    - 'test/**/*'
 
 Metrics/MethodLength:
   Exclude:
-    - db/migrate/*.rb
+    - '**/migrate/*'
 
-Style/AutoResourceCleanup:
+Naming/BlockForwarding:
+  Enabled: true
+
+Security/CompoundHash:
+  Enabled: true
+
+Security/IoMethods:
+  Enabled: true
+
+Style/ArgumentsForwarding:
+  Enabled: true
+
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+Style/CollectionCompact:
   Enabled: true
 
 Style/CollectionMethods:
   Enabled: true
 
-Style/ConstantVisibility:
-  Enabled: true
+Style/CommandLiteral:
+  EnforcedStyle: percent_x
 
-Style/DateTime:
-  Enabled: true
+Style/CommentAnnotation:
+  Keywords:
+    - TODO
+    - FIXME
+    - HACK
+    - BUG
 
 Style/Documentation:
   Exclude:
-    - test/**/*.rb
-    - db/migrate/*.rb
+    - '**/migrate/*'
+    - 'test/**/*'
 
-Style/ImplicitRuntimeError:
+Style/DocumentDynamicEvalDefinition:
   Enabled: true
 
-Style/MethodCallWithArgsParentheses:
+Style/EndlessMethod:
   Enabled: true
-  AllowParenthesesInMultilineCall: true
-  AllowParenthesesInChaining: true
-  AllowParenthesesInCamelCaseMethod: true
-  IgnoredMethods:
-    - add_dependency
-    - add_development_dependency
-    - hash_token_secrets
-    - head
-    - puts
-    - raise
-    - redirect_to
-    - render
-    - require
-    - require_relative
-  Exclude:
-    - db/migrate/*.rb
-    - test/dummy/config/puma.rb
 
-Style/MethodCalledOnDoEndBlock:
+Style/EnvHome:
+  Enabled: true
+
+Style/FetchEnvVar:
+  Enabled: true
+
+Style/FileRead:
+  Enabled: true
+
+Style/FileWrite:
+  Enabled: true
+
+Style/HashConversion:
+  Enabled: true
+
+Style/HashExcept:
+  Enabled: true
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: true
+
+Style/InPatternThen:
+  Enabled: true
+
+Style/MapToHash:
+  Enabled: true
+
+Style/MultilineInPatternThen:
+  Enabled: true
+
+Style/NegatedIfElseCondition:
+  Enabled: true
+
+Style/NestedFileDirname:
+  Enabled: true
+
+Style/NilLambda:
+  Enabled: true
+
+Style/NumberedParameters:
+  Enabled: true
+  EnforcedStyle: disallow
+
+Style/NumberedParametersLimit:
+  Enabled: false # since NumberedParameters disallows numbered params anyways
+
+Style/ObjectThen:
+  Enabled: true
+
+Style/OpenStructUse:
   Enabled: true
 
 Style/OptionHash:
   Enabled: true
 
-Style/Send:
+Style/QuotedSymbols:
   Enabled: true
 
-Style/StringMethods:
+Style/RedundantArgument:
   Enabled: true
 
-Style/TrailingCommaInBlockArgs:
+Style/RedundantInitialize:
+  Enabled: true
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: true
+
+Style/SelectByRegexp:
+  Enabled: true
+
+Style/StringChars:
+  Enabled: true
+
+Style/SwapValues:
+  Enabled: true
+
+# rubocop-performance
+
+Performance/AncestorsInclude:
+  Enabled: true
+
+Performance/BigDecimalWithNumericArgument:
+  Enabled: true
+
+Performance/BlockGivenWithExplicitBlock:
+  Enabled: true
+
+Performance/CollectionLiteralInLoop:
+  Enabled: true
+
+Performance/ConcurrentMonotonicTime:
+  Enabled: true
+
+Performance/ConstantRegexp:
+  Enabled: true
+
+Performance/MapCompact:
+  Enabled: true
+
+Performance/MethodObjectAsBlock:
+  Enabled: true
+
+Performance/RedundantEqualityComparisonBlock:
+  Enabled: true
+
+Performance/RedundantSortBlock:
+  Enabled: true
+
+Performance/RedundantSplitRegexpArgument:
+  Enabled: true
+
+Performance/RedundantStringChars:
+  Enabled: true
+
+Performance/ReverseFirst:
+  Enabled: true
+
+Performance/SortReverse:
+  Enabled: true
+
+Performance/Squeeze:
+  Enabled: true
+
+Performance/StringIdentifierArgument:
+  Enabled: true
+
+Performance/StringInclude:
+  Enabled: true
+
+Performance/Sum:
+  Enabled: true
+
+# rubocop-rails
+
+Rails/ActionControllerTestCase:
+  Enabled: true
+
+Rails/ActiveRecordCallbacksOrder:
+  Enabled: true
+
+Rails/AddColumnIndex:
+  Enabled: true
+
+Rails/AfterCommitOverride:
+  Enabled: true
+
+Rails/AttributeDefaultBlockValue:
+  Enabled: true
+
+Rails/CompactBlank:
+  Enabled: true
+
+Rails/DeprecatedActiveModelErrorsMethods:
+  Enabled: true
+
+Rails/DuplicateAssociation:
+  Enabled: true
+
+Rails/DuplicateScope:
+  Enabled: true
+
+Rails/DurationArithmetic:
+  Enabled: true
+
+Rails/EagerEvaluationLogMessage:
+  Enabled: true
+
+Rails/EnvironmentVariableAccess:
+  Enabled: true
+
+Rails/ExpandedDateRange:
+  Enabled: true
+
+Rails/FindById:
+  Enabled: true
+
+Rails/I18nLazyLookup:
+  Enabled: true
+
+Rails/I18nLocaleAssignment:
+  Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: true
+
+Rails/Inquiry:
+  Enabled: true
+
+Rails/MailerName:
+  Enabled: true
+
+Rails/MatchRoute:
+  Enabled: true
+
+Rails/MigrationClassName:
+  Enabled: true
+
+Rails/NegateInclude:
+  Enabled: true
+
+Rails/Pluck:
+  Enabled: true
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: true
+
+Rails/RedundantTravelBack:
+  Enabled: true
+
+Rails/RenderInline:
+  Enabled: true
+
+Rails/RenderPlainText:
+  Enabled: true
+
+Rails/RootJoinChain:
+  Enabled: true
+
+Rails/ShortI18n:
+  Enabled: true
+
+Rails/SquishedSQLHeredocs:
+  Enabled: true
+
+Rails/TimeZoneAssignment:
+  Enabled: true
+
+Rails/TransactionExitStatement:
+  Enabled: true
+
+Rails/UnusedIgnoredColumns:
+  Enabled: true
+
+Rails/WhereEquals:
+  Enabled: true
+
+Rails/WhereExists:
+  Enabled: true
+
+Rails/WhereNot:
   Enabled: true

@@ -15,7 +15,7 @@ module Doorkeeper
 
         delegate :secret_strategy, :fallback_secret_strategy, to: :class
 
-        belongs_to :application, class_name: Doorkeeper.configuration.application_class, optional: true
+        belongs_to :application, class_name: Doorkeeper.configuration.application_class.to_s, optional: true
 
         before_validation :generate_device_code, on: :create
 

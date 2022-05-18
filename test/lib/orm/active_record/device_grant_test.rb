@@ -114,14 +114,11 @@ module Doorkeeper
         assert_equal unexpired_grant.id, results.first.id
       end
 
-      test 'with token hashing enabled, it holds a volatile plaintext device ' \
-          'code when created' do
+      test 'with token hashing enabled, it holds a volatile plaintext device code when created' do
         enable_hash_token_secrets
         grant = DeviceGrant.create!(model_attributes)
         assert_instance_of String, grant.plaintext_device_code
-        assert_equal \
-          transform_hashed_token(grant.plaintext_device_code),
-          grant.device_code
+        assert_equal transform_hashed_token(grant.plaintext_device_code), grant.device_code
 
         # Finder method only finds the hashed token
         found = DeviceGrant.find_by(device_code: grant.device_code)
@@ -130,19 +127,18 @@ module Doorkeeper
         assert_equal grant.device_code, found.device_code
       end
 
-      test 'with token hashing enabled, it does not find_by plain text ' \
-          'tokens' do
+      test 'with token hashing enabled, it does not find_by plain text tokens' do
         enable_hash_token_secrets
         grant = DeviceGrant.create!(model_attributes)
         assert_nil DeviceGrant.find_by(device_code: grant.plaintext_device_code)
       end
 
-      test 'with token hashing enabled and having a plain text token, it ' \
-          'does not provide lookups with either through by_token' do
+      test 'with token hashing enabled and having a plain text token, ' \
+        'it does not provide lookups with either through by_token' do
         enable_hash_token_secrets
         grant = DeviceGrant.create!(model_attributes)
         # Assume we have a plain text token from before activating the option
-        grant.update_column(:device_code, 'plain text token')
+        grant.update_column(:device_code, 'plain text token') # rubocop:disable Rails/SkipsModelValidations
 
         assert_nil DeviceGrant.by_device_code('plain text token')
         assert_nil DeviceGrant.by_device_code(grant.device_code)
@@ -152,12 +148,11 @@ module Doorkeeper
         assert_equal 'plain text token', grant.device_code
       end
 
-      test 'with token hashing and fallback lookup enabled, it upgrades ' \
-        'a plain token when falling back to it' do
+      test 'with token hashing and fallback lookup enabled, it upgrades a plain token when falling back to it' do
         enable_hash_token_secrets(fallback: :plain)
         grant = DeviceGrant.create!(model_attributes)
         # Assume we have a plain text token from before activating the option
-        grant.update_column(:device_code, 'plain text token')
+        grant.update_column(:device_code, 'plain text token') # rubocop:disable Rails/SkipsModelValidations
 
         found = DeviceGrant.by_device_code('plain text token')
         assert_equal grant.id, found.id
@@ -168,7 +163,7 @@ module Doorkeeper
 
         # And it modifies the token value
         grant.reload
-        refute_equal 'plain text token', grant.device_code
+        assert_not_equal 'plain text token', grant.device_code
         assert_nil DeviceGrant.find_by(device_code: 'plain text token')
         assert_not_nil DeviceGrant.find_by(device_code: grant.device_code)
       end
@@ -185,7 +180,7 @@ module Doorkeeper
           scopes: '',
           device_code: nil,
           user_code: 'foo',
-          created_at: Time.now,
+          created_at: Time.now.utc,
           last_polling_at: nil
         }.merge(attributes_overrides)
       end
