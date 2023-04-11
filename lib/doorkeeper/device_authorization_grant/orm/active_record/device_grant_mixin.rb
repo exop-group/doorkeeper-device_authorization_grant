@@ -130,7 +130,7 @@ module Doorkeeper
       end
 
       def scopes_match_configured
-        if scopes.present? && !Doorkeeper::OAuth::Helpers::ScopeChecker.valid?( # rubocop:disable Style/InverseMethods
+        if scopes.present? && !Doorkeeper::OAuth::Helpers::ScopeChecker.valid?(
           scope_str: scopes.to_s,
           server_scopes: Doorkeeper.config.scopes
         )

@@ -22,9 +22,9 @@ module Doorkeeper
           next authorization_error_response(:expired_user_code) if device_grant.expired?
 
           device_grant.update!(user_code: nil, resource_owner_id: current_resource_owner.id)
-        end
 
-        authorization_success_response
+          authorization_success_response
+        end
       end
 
       private
