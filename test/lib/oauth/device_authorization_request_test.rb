@@ -12,13 +12,14 @@ module Doorkeeper
             name: 'Application',
             redirect_uri: 'https://example.com/application/redirect'
           )
+          @client = Doorkeeper::OAuth::Client.new(@application)
 
           @server = MiniTest::Mock.new
           @server.expect(:default_scopes, 'public')
 
           @request = DeviceAuthorizationRequest.new(
             @server,
-            @application,
+            @client,
             'https://example.com'
           )
 
@@ -75,7 +76,7 @@ module Doorkeeper
           assert_not_nil DeviceGrant.find_by(id: @expired_device_grant.id)
           assert_not_nil DeviceGrant.find_by(id: @unexpired_device_grant.id)
 
-          @request.client = @application
+          @request.client = @client
           @request.authorize
 
           assert_nil DeviceGrant.find_by(id: @expired_device_grant.id)
