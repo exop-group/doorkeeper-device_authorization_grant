@@ -12,6 +12,7 @@ module Doorkeeper
             name: 'Application',
             redirect_uri: 'https://example.com/application/redirect'
           )
+          @client = Doorkeeper::OAuth::Client.new(@application)
 
           @server = MiniTest::Mock.new
           @server.expect(:access_token_expires_in, 2.days)
@@ -45,8 +46,14 @@ module Doorkeeper
           )
         end
 
+        teardown do
+          Doorkeeper.configure do
+            allow_grant_flow_for_client { |*| true }
+          end
+        end
+
         test '#authorize raises ExpiredToken error if the device grant is expired and deletes the device grant' do
-          request = DeviceCodeRequest.new(@server, @application, @expired_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @expired_device_grant)
 
           assert_raises Errors::ExpiredToken do
             request.authorize
@@ -56,7 +63,7 @@ module Doorkeeper
         end
 
         test '#authorize raises AuthorizationPending error if the device grant has not been verified' do
-          request = DeviceCodeRequest.new(@server, @application, @unverified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @unverified_device_grant)
 
           assert_raises Errors::AuthorizationPending do
             request.authorize
@@ -65,14 +72,14 @@ module Doorkeeper
 
         test '#authorize raises SlowDown error when polling too frequently' do
           @unverified_device_grant.update!(last_polling_at: 1.second.ago)
-          request = DeviceCodeRequest.new(@server, @application, @unverified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @unverified_device_grant)
           assert_raises Errors::SlowDown do
             request.authorize
           end
         end
 
         test '#authorize issues a new token if the device grant has been verified' do
-          request = DeviceCodeRequest.new(@server, @application, @verified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
           assert_equal 0, @application.reload.access_tokens.count
 
           request.authorize
@@ -80,20 +87,20 @@ module Doorkeeper
         end
 
         test '#authorize with a verified device grant issues a new token with same device grant scopes' do
-          request = DeviceCodeRequest.new(@server, @application, @verified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
           request.authorize
           assert_equal @verified_device_grant.scopes, Doorkeeper::AccessToken.last.scopes.to_s
         end
 
         test '#authorize with a verified device grant deletes the device grant' do
-          request = DeviceCodeRequest.new(@server, @application, @verified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
           request.authorize
           assert_nil DeviceGrant.find_by(id: @verified_device_grant.id)
         end
 
         test '#authorize updates the polling interval of an unverified device grant' do
           assert_nil @unverified_device_grant.last_polling_at
-          request = DeviceCodeRequest.new(@server, @application, @unverified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @unverified_device_grant)
           suppress(Errors::AuthorizationPending) { request.authorize }
           assert_not_nil @unverified_device_grant.reload.last_polling_at
         end
@@ -105,8 +112,25 @@ module Doorkeeper
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
         end
 
+        test 'it validates against allow_grant_flow_for_client option' do
+          args = nil
+          Doorkeeper.configure do
+            allow_grant_flow_for_client do |*a|
+              args = a
+              false
+            end
+          end
+
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
+          request.validate
+          assert_equal :unauthorized_client, request.error
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
+
+          assert_equal ['urn:ietf:params:oauth:grant-type:device_code', @application], args
+        end
+
         test 'it requires the device grant' do
-          request = DeviceCodeRequest.new(@server, @application, nil)
+          request = DeviceCodeRequest.new(@server, @client, nil)
           request.validate
           assert_equal :invalid_grant, request.error
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
@@ -118,7 +142,7 @@ module Doorkeeper
             redirect_uri: 'https://example.com/'
           )
           @verified_device_grant.application = another_app
-          request = DeviceCodeRequest.new(@server, @application, @verified_device_grant)
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
           request.validate
           assert_equal :invalid_grant, request.error
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize

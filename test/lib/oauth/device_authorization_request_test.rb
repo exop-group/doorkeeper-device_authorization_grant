@@ -12,13 +12,14 @@ module Doorkeeper
             name: 'Application',
             redirect_uri: 'https://example.com/application/redirect'
           )
+          @client = Doorkeeper::OAuth::Client.new(@application)
 
           @server = MiniTest::Mock.new
           @server.expect(:default_scopes, 'public')
 
           @request = DeviceAuthorizationRequest.new(
             @server,
-            @application,
+            @client,
             'https://example.com'
           )
 
@@ -34,6 +35,9 @@ module Doorkeeper
           Doorkeeper::DeviceAuthorizationGrant.configure do
             device_code_expires_in original_config[:device_code_expires_in]
             user_code_generator original_config[:user_code_generator]
+          end
+          Doorkeeper.configure do
+            allow_grant_flow_for_client { |*| true }
           end
         end
 
@@ -53,6 +57,23 @@ module Doorkeeper
           assert_not @request.valid?
           assert_equal :invalid_client, @request.error
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, @request.authorize
+        end
+
+        test 'it validates against allow_grant_flow_for_client option' do
+          args = nil
+          Doorkeeper.configure do
+            allow_grant_flow_for_client do |*a|
+              args = a
+              false
+            end
+          end
+
+          @request.validate
+          assert_not @request.valid?
+          assert_equal :unauthorized_client, @request.error
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, @request.authorize
+
+          assert_equal ['urn:ietf:params:oauth:grant-type:device_code', @application], args
         end
 
         test 'only when valid, it removes expired device grants' do
@@ -75,7 +96,7 @@ module Doorkeeper
           assert_not_nil DeviceGrant.find_by(id: @expired_device_grant.id)
           assert_not_nil DeviceGrant.find_by(id: @unexpired_device_grant.id)
 
-          @request.client = @application
+          @request.client = @client
           @request.authorize
 
           assert_nil DeviceGrant.find_by(id: @expired_device_grant.id)

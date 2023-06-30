@@ -13,6 +13,7 @@ module Doorkeeper
         attr_accessor :host_name
 
         validate :client, error: :invalid_client
+        validate :client_supports_grant_flow, error: :unauthorized_client
 
         # @param server
         # @param client
@@ -58,6 +59,13 @@ module Doorkeeper
         # @return [Boolean]
         def validate_client
           client.present?
+        end
+
+        # @return [Boolean]
+        def validate_client_supports_grant_flow
+          client.present? && Doorkeeper.config.allow_grant_flow_for_client?(
+            Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE, client.application
+          )
         end
 
         # @return [Doorkeeper::DeviceAuthorizationGrant::DeviceGrant]
