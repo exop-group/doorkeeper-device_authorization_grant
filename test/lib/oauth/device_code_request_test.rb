@@ -46,6 +46,12 @@ module Doorkeeper
           )
         end
 
+        teardown do
+          Doorkeeper.configure do
+            allow_grant_flow_for_client { |*| true }
+          end
+        end
+
         test '#authorize raises ExpiredToken error if the device grant is expired and deletes the device grant' do
           request = DeviceCodeRequest.new(@server, @client, @expired_device_grant)
 
@@ -104,6 +110,23 @@ module Doorkeeper
           request.validate
           assert_equal :invalid_client, request.error
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
+        end
+
+        test 'it validates against allow_grant_flow_for_client option' do
+          args = nil
+          Doorkeeper.configure do
+            allow_grant_flow_for_client do |*a|
+              args = a
+              false
+            end
+          end
+
+          request = DeviceCodeRequest.new(@server, @client, @verified_device_grant)
+          request.validate
+          assert_equal :unauthorized_client, request.error
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
+
+          assert_equal ['urn:ietf:params:oauth:grant-type:device_code', @application], args
         end
 
         test 'it requires the device grant' do

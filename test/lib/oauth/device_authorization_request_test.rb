@@ -36,6 +36,9 @@ module Doorkeeper
             device_code_expires_in original_config[:device_code_expires_in]
             user_code_generator original_config[:user_code_generator]
           end
+          Doorkeeper.configure do
+            allow_grant_flow_for_client { |*| true }
+          end
         end
 
         test 'it creates a new device grant' do
@@ -54,6 +57,23 @@ module Doorkeeper
           assert_not @request.valid?
           assert_equal :invalid_client, @request.error
           assert_instance_of Doorkeeper::OAuth::ErrorResponse, @request.authorize
+        end
+
+        test 'it validates against allow_grant_flow_for_client option' do
+          args = nil
+          Doorkeeper.configure do
+            allow_grant_flow_for_client do |*a|
+              args = a
+              false
+            end
+          end
+
+          @request.validate
+          assert_not @request.valid?
+          assert_equal :unauthorized_client, @request.error
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, @request.authorize
+
+          assert_equal ['urn:ietf:params:oauth:grant-type:device_code', @application], args
         end
 
         test 'only when valid, it removes expired device grants' do
