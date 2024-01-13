@@ -12,8 +12,8 @@ module Doorkeeper
         # @return [DeviceGrant]
         attr_accessor :device_grant
 
-        validate :client, error: :invalid_client
-        validate :device_grant, error: :invalid_grant
+        validate :client, error: Errors::InvalidClient
+        validate :device_grant, error: Errors::InvalidGrant
 
         # @param server
         # @param client

@@ -12,7 +12,7 @@ module Doorkeeper
         # @return [String]
         attr_accessor :host_name
 
-        validate :client, error: :invalid_client
+        validate :client, error: Errors::InvalidClient
 
         # @param server
         # @param client
