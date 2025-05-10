@@ -13,6 +13,7 @@ module Doorkeeper
         attr_accessor :host_name
 
         validate :client, error: :invalid_client
+        validate :scopes, error: Doorkeeper::Errors::InvalidScope
 
         # @param server
         # @param client
@@ -58,6 +59,16 @@ module Doorkeeper
         # @return [Boolean]
         def validate_client
           client.present?
+        end
+
+        # @return [Boolean]
+        def validate_scopes
+          Doorkeeper::OAuth::Helpers::ScopeChecker.valid?(
+            scope_str: scopes.to_s,
+            server_scopes: server.scopes,
+            app_scopes: client.scopes,
+            grant_type: Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE
+          )
         end
 
         # @return [Doorkeeper::DeviceAuthorizationGrant::DeviceGrant]

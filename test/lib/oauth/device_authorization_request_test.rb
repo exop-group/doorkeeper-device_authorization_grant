@@ -7,18 +7,39 @@ module Doorkeeper
   module DeviceAuthorizationGrant
     module OAuth
       class DeviceAuthorizationRequestTest < ActiveSupport::TestCase
+        class MockServer
+          def default_scopes
+            Doorkeeper.config.default_scopes
+          end
+
+          def optional_scopes
+            Doorkeeper.config.optional_scopes
+          end
+
+          def scopes
+            Doorkeeper.config.default_scopes + Doorkeeper.config.optional_scopes
+          end
+        end
+
         setup do
           @application = Doorkeeper::Application.create!(
             name: 'Application',
-            redirect_uri: 'https://example.com/application/redirect'
+            redirect_uri: 'https://example.com/application/redirect',
+            scopes: 'read write'
           )
+          @client = Doorkeeper::OAuth::Client.new(@application)
 
-          @server = MiniTest::Mock.new
-          @server.expect(:default_scopes, 'public')
+          Doorkeeper.configure do
+            enforce_configured_scopes
+            default_scopes :read
+            optional_scopes :read, :write, :delete
+          end
+
+          @server = MockServer.new
 
           @request = DeviceAuthorizationRequest.new(
             @server,
-            @application,
+            @client,
             'https://example.com'
           )
 
@@ -75,7 +96,7 @@ module Doorkeeper
           assert_not_nil DeviceGrant.find_by(id: @expired_device_grant.id)
           assert_not_nil DeviceGrant.find_by(id: @unexpired_device_grant.id)
 
-          @request.client = @application
+          @request.client = @client
           @request.authorize
 
           assert_nil DeviceGrant.find_by(id: @expired_device_grant.id)
@@ -105,11 +126,37 @@ module Doorkeeper
           assert_equal 600, device_grant.expires_in
         end
 
-        test 'it assigns the correct scopes to the new device grant' do
+        test 'it assigns the correct default scopes to the new device grant' do
           @request.authorize
           device_grant = DeviceGrant.first
-          assert_equal 'public', device_grant.scopes
-          @server.verify
+          assert_equal 'read', device_grant.scopes.to_s
+        end
+
+        test 'it assigns the requested scopes to the new device grant provided the application has those scopes' do
+          request = DeviceAuthorizationRequest.new(
+            @server,
+            @client,
+            'https://example.com',
+            { scope: 'read write' }
+          )
+          request.authorize
+          device_grant = DeviceGrant.first
+          assert_equal 'read write', device_grant.scopes.to_s
+        end
+
+        test 'it rejects the requested scopes if the application does not have those scopes' do
+          # The delete scope is valid for the server, but not for the
+          # application which only has read & write scopes
+          request = DeviceAuthorizationRequest.new(
+            @server,
+            @client,
+            'https://example.com',
+            { scope: 'delete' }
+          )
+
+          assert_not request.valid?
+          assert_equal Doorkeeper::Errors::InvalidScope, request.error
+          assert_instance_of Doorkeeper::OAuth::ErrorResponse, request.authorize
         end
 
         test 'it assigns a user code to the new device grant with the default generator if not configured' do

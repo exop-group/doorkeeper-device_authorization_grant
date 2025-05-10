@@ -7,22 +7,39 @@ module Doorkeeper
   module DeviceAuthorizationGrant
     module OAuth
       class DeviceCodeRequestTest < ActiveSupport::TestCase
+        class MockServer
+          def default_scopes
+            Doorkeeper.config.default_scopes
+          end
+
+          def optional_scopes
+            Doorkeeper.config.optional_scopes
+          end
+
+          def scopes
+            Doorkeeper.config.default_scopes + Doorkeeper.config.optional_scopes
+          end
+
+          def access_token_expires_in
+            2.days
+          end
+
+          def refresh_token_enabled?
+            false
+          end
+
+          def option_defined?(option)
+            false if option == :custom_access_token_expires_in
+          end
+        end
+
         setup do
           @application = Doorkeeper::Application.create!(
             name: 'Application',
             redirect_uri: 'https://example.com/application/redirect'
           )
 
-          @server = MiniTest::Mock.new
-          @server.expect(:access_token_expires_in, 2.days)
-          @server.expect(
-            :option_defined?,
-            false,
-            [:custom_access_token_expires_in]
-          )
-          def @server.refresh_token_enabled?
-            false
-          end
+          @server = MockServer.new
 
           @expired_device_grant = DeviceGrant.create!(
             created_at: 61.seconds.ago,
