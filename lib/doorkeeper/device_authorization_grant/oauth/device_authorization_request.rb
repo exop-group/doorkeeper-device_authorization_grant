@@ -61,11 +61,12 @@ module Doorkeeper
           client.present?
         end
 
+        # @return [Boolean]
         def validate_scopes
           Doorkeeper::OAuth::Helpers::ScopeChecker.valid?(
             scope_str: scopes.to_s,
-            server_scopes: @server.scopes,
-            app_scopes: @client.scopes,
+            server_scopes: server.scopes,
+            app_scopes: client.scopes,
             grant_type: Doorkeeper::DeviceAuthorizationGrant::OAuth::DEVICE_CODE
           )
         end
