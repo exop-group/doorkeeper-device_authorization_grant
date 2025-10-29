@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dropped compatibility with Ruby on Rails versions < 7.
 - Dropped compatibility with Ruby versions < 3.1.
 
+### Added
+
+- Added compatibility with Ruby versions 3.3 and 3.4.
+
 ## [1.0.3] - 2023-04-11
 ### Fixed
 
