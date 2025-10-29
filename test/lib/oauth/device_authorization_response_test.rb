@@ -13,7 +13,7 @@ module Doorkeeper
           )
 
           @device_grant = DeviceGrant.create!(
-            application: application,
+            application:,
             expires_in: 5.minutes,
             user_code: 'foo'
           )

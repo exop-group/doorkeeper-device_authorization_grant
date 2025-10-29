@@ -2,12 +2,12 @@
 
 module Doorkeeper
   module DeviceAuthorizationGrant # rubocop:disable Style/Documentation
-    def self.configure(&block)
+    def self.configure(&)
       if ::Doorkeeper.configuration.orm != :active_record
         raise UnsupportedConfiguration, 'Doorkeeper::DeviceAuthorizationGrant only supports ActiveRecord ORM'
       end
 
-      @config = Config::Builder.new(Config.new, &block).build
+      @config = Config::Builder.new(Config.new, &).build
     end
 
     # @return [::Doorkeeper::DeviceAuthorizationGrant::Config]

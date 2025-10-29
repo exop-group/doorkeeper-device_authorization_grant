@@ -17,7 +17,7 @@ module Doorkeeper
 
       def authorize
         device_grant_model.transaction do
-          device_grant = device_grant_model.lock.find_by(user_code: user_code)
+          device_grant = device_grant_model.lock.find_by(user_code:)
           next authorization_error_response(:invalid_user_code) if device_grant.nil?
           next authorization_error_response(:expired_user_code) if device_grant.expired?
 
@@ -32,7 +32,7 @@ module Doorkeeper
       def authorization_success_response
         respond_to do |format|
           notice = I18n.t(:success, scope: i18n_flash_scope(:authorize))
-          format.html { redirect_to oauth_device_authorizations_index_url, notice: notice }
+          format.html { redirect_to oauth_device_authorizations_index_url, notice: }
           format.json { head :no_content }
         end
       end
@@ -41,7 +41,7 @@ module Doorkeeper
       def authorization_error_response(error_message_key)
         respond_to do |format|
           notice = I18n.t(error_message_key, scope: i18n_flash_scope(:authorize))
-          format.html { redirect_to oauth_device_authorizations_index_url, notice: notice }
+          format.html { redirect_to oauth_device_authorizations_index_url, notice: }
           format.json do
             render json: { errors: [notice] }, status: :unprocessable_entity
           end
