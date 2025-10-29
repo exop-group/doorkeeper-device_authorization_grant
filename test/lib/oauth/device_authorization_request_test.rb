@@ -13,7 +13,7 @@ module Doorkeeper
             redirect_uri: 'https://example.com/application/redirect'
           )
 
-          @server = MiniTest::Mock.new
+          @server = Minitest::Mock.new
           @server.expect(:default_scopes, 'public')
 
           @request = DeviceAuthorizationRequest.new(

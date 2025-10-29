@@ -13,7 +13,7 @@ module Doorkeeper
             redirect_uri: 'https://example.com/application/redirect'
           )
 
-          @server = MiniTest::Mock.new
+          @server = Minitest::Mock.new
           @server.expect(:access_token_expires_in, 2.days)
           @server.expect(
             :option_defined?,
