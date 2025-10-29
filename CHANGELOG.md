@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Dropped compatibility with Ruby on Rails version 5.
+- Dropped compatibility with Ruby versions < 3.1.
 
 ## [1.0.3] - 2023-04-11
 ### Fixed
