@@ -4,7 +4,7 @@ require:
 
 AllCops:
   DisplayStyleGuide: true
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.1
   Exclude:
     - 'test/dummy/db/schema.rb'
 

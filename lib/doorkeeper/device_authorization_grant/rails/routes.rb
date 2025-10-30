@@ -8,9 +8,9 @@ module Doorkeeper
       class Routes # rubocop:disable Style/Documentation
         module Helper # rubocop:disable Style/Documentation
           # @param options [Hash]
-          def use_doorkeeper_device_authorization_grant(options = {}, &block)
+          def use_doorkeeper_device_authorization_grant(options = {}, &)
             ::Doorkeeper::DeviceAuthorizationGrant::Rails::Routes
-              .new(self, &block).generate_routes!(options)
+              .new(self, &).generate_routes!(options)
           end
         end
 

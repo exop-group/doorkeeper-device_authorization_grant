@@ -187,7 +187,7 @@ module Doorkeeper
 
       def enable_hash_token_secrets(fallback: nil)
         Doorkeeper.configure do
-          hash_token_secrets fallback: fallback
+          hash_token_secrets fallback:
         end
       end
 
