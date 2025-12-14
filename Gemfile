@@ -11,3 +11,5 @@ gemspec
 
 gem 'rails', '~> 7.0.0'
 gem 'sprockets-rails', '~> 3.0'
+
+gem 'minitest', '~> 5.25.2', group: %i[development test]
