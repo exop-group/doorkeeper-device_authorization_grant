@@ -55,7 +55,7 @@ module Doorkeeper
         def generate_access_token_with_empty_custom_attributes
           find_or_create_access_token(
             device_grant.application,
-            device_grant.resource_owner_id,
+            resource_owner,
             device_grant.scopes,
             {},
             server
@@ -65,10 +65,18 @@ module Doorkeeper
         def generate_access_token_without_custom_attributes
           find_or_create_access_token(
             device_grant.application,
-            device_grant.resource_owner_id,
+            resource_owner,
             device_grant.scopes,
             server
           )
+        end
+
+        def resource_owner
+          if Doorkeeper.config.polymorphic_resource_owner?
+            device_grant.resource_owner
+          else
+            device_grant.resource_owner_id
+          end
         end
 
         def check_grant_errors!

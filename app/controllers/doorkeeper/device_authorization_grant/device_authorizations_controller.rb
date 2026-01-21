@@ -21,13 +21,25 @@ module Doorkeeper
           next authorization_error_response(:invalid_user_code) if device_grant.nil?
           next authorization_error_response(:expired_user_code) if device_grant.expired?
 
-          device_grant.update!(user_code: nil, resource_owner_id: current_resource_owner.id)
+          device_grant.update!(grant_update_attributes)
 
           authorization_success_response
         end
       end
 
       private
+
+      def grant_update_attributes
+        attributes = { user_code: nil }
+
+        if Doorkeeper.configuration.polymorphic_resource_owner?
+          attributes[:resource_owner] = current_resource_owner
+        else
+          attributes[:resource_owner_id] = current_resource_owner.id
+        end
+
+        attributes
+      end
 
       def authorization_success_response
         respond_to do |format|

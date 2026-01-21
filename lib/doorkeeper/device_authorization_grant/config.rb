@@ -80,6 +80,11 @@ module Doorkeeper
         end
       )
 
+      # @!attribute [r] polymorphic_resource_owner
+      #   Determines if the resource owner association is polymorphic.
+      #   @return [Boolean]
+      option :polymorphic_resource_owner, default: false
+
       # @return [Class]
       def device_grant_model
         @device_grant_model ||= device_grant_class.constantize
